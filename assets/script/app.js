@@ -16,7 +16,7 @@ const storageAlertMessage = select('.storage-alert-message');
 
 const contactsArr = [];
 let name, city, email;
-let maxContacts = 9;
+const maxContacts = 9;
 savedContacts.innerText = 'Saved contacts: 0';
 
 // Function to validate inputs
@@ -27,16 +27,18 @@ function validateInputs() {
     .map(part => part.trim());
   [name, city, email] = userInput;
 
+  const nameCityRegex = /^[a-zA-Z]+$/;
+
   const emailRegex =
     /^(?=.{8,}$)[-_A-Za-z0-9]+([.-_][a-zA-Z0-9]+)*@[A-Za-z0-9]+([.-][a-zA-Z0-9]+)*\.[A-Za-z]{2,}$/;
 
   if (userInput.length === 3) {
-    if (typeof name !== 'string' || name.length < 2 || /\d/.test(name)) {
+    if (typeof name !== 'string' || name.length < 2 || !nameCityRegex.test(name)) {
       displayErrorMessage('Please enter a valid name!');
       return false;
     }
 
-    if (typeof city !== 'string' || city.length < 2 || /\d/.test(city)) {
+    if (typeof city !== 'string' || city.length < 2 || !nameCityRegex.test(city)) {
       displayErrorMessage('Please enter a valid city!');
       return false;
     }
